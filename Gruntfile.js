@@ -1,33 +1,10 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
-        //Compile Sass
-        sass: {
-            dist: {
-                options: {
-                    style: 'expanded'
-                },
-                files: {
-                    'src/temp/flexinizr.css': ['src/flexinizr.scss']
-                }
-            }
-        },
-        // Concatenate css
-        cssmin: {
-            options: {
-                shorthandCompacting: false,
-                roundingPrecision: -1
-            },
-            target: {
-                files: {
-                    'dist/flexinizr.min.css': ['src/compiled/flexinizr.css']
-                }
-            }
-        },
         //Watch changes
         watch: {
             css: {
-                files: ['src/flexinizr.scss'],
+                files: ['src/flexinizr.scss', 'src/flexinizr.css'],
                 tasks: ['default']
             }
         },
@@ -35,42 +12,36 @@ module.exports = function (grunt) {
         copy: {
             main: {
                 files: [
-                    {expand: false, src: 'src/compiled/flexinizr.css', dest: 'dist/flexinizr.css'}
+                    {expand: false, src: 'src/index.html', dest: 'dist/index.html'},
+                    {expand: false, src: './logo.png', dest: 'dist/logo.png'},
+                    {expand: false, src: 'src/flexinizr.css', dest: 'dist/flexinizr.css'},
+                    {expand: false, src: 'src/flexinizr.scss', dest: 'dist/flexinizr.scss'},
+                    {expand: false, src: 'src/flexinizr.css.map', dest: 'dist/flexinizr.css.map'}
                 ]
             }
         },
         //perform post tasks
         postcss: {
             options: {
-                map: false,
+                map: true,
                 processors: [
                     require('autoprefixer')({browsers: ['last 1 version'], cascade: true})]
             },
             dist: {
-                src: 'src/temp/flexinizr.css',
-                dest: 'src/compiled/flexinizr.css'
-            }
-        },
-        uglify: {
-            my_target: {
-                files: {
-                    'dist/flexinizr.min.js': ['src/*.js']
-                }
+                src: 'src/flexinizr.css',
+                dest: 'src/flexinizr.css'
             }
         }
     });
 
 
     // Load
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-postcss');
 
 
     // Register
-    grunt.registerTask('default', ['sass', 'postcss', 'copy', 'cssmin', 'uglify']);
+    grunt.registerTask('default', ['postcss', 'copy']);
 
 };
