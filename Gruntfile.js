@@ -4,7 +4,7 @@ module.exports = function (grunt) {
         //Watch changes
         watch: {
             css: {
-                files: ['src/flexinizr.scss', 'src/flexinizr.css'],
+                files: ['src/flexinizr-unprefixed.css'],
                 tasks: ['default']
             }
         },
@@ -15,8 +15,8 @@ module.exports = function (grunt) {
                     {expand: false, src: 'src/index.html', dest: 'dist/index.html'},
                     {expand: false, src: './logo.png', dest: 'dist/logo.png'},
                     {expand: false, src: 'src/flexinizr.css', dest: 'dist/flexinizr.css'},
-                    {expand: false, src: 'src/flexinizr.scss', dest: 'dist/flexinizr.scss'},
-                    {expand: false, src: 'src/flexinizr.css.map', dest: 'dist/flexinizr.css.map'}
+                    {expand: false, src: 'src/flexinizr-unprefixed.css', dest: 'dist/flexinizr-unprefixed.css'}
+                    //{expand: false, src: 'src/flexinizr.css.map', dest: 'dist/flexinizr.css.map'}
                 ]
             }
         },
@@ -25,10 +25,10 @@ module.exports = function (grunt) {
             options: {
                 map: true,
                 processors: [
-                    require('autoprefixer')({browsers: ['last 1 version'], cascade: true})]
+                    require('autoprefixer')({browsers: ['last 2 versions'], cascade: true})]
             },
             dist: {
-                src: 'src/flexinizr.css',
+                src: 'src/flexinizr-unprefixed.css',
                 dest: 'src/flexinizr.css'
             }
         }
