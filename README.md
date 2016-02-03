@@ -1,31 +1,16 @@
-![logo](http://flexinizr.io/logo.png)
+did this to try to repro https://code.google.com/p/chromium/issues/detail?id=273384
 
-### Requirements
 
-* [NodeJS/NPM](http://nodejs.org)
+```sh
+npm install
+grunt watch
+```
 
-##Use
-### Installation
+1. serve the dist folder with a simple server
+2. add dist folder as a worksapce
+3. map them.
+4. run `grunt watch` if not already running
+5. make a change to `flexinizr-unprefixed.css` and save. (i suggest a bg color on the top body,html rule)
+6. (watch should trigger and postcss should compile)
 
-* `npm install flexinizr --save`
-
-Include
-> dist/flexinizr.min.css
-
-> dist/flexinizr.js (optional)
-
-in your HTML and you are good to go!
-
-## Development
-
-### Dependencies
-
-Run `npm install` to download node_modules.
-
-### Build
-
-Run `grunt` to compile SASS and run post-css scripts.
-
-## Documentation
-
-**Demo and further documentation coming soon**
+on ToT i see chrome update with the new styles. this happens regardless of what the "auto-reload generated css" checkbox is set to.
